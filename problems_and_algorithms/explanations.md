@@ -123,7 +123,7 @@ In this problem, we will look for smallest and largest integer from a list of un
 
 
 ### Algorithm:
-We can initialize a min number $=\infty$ and a max number $=-\infty$. Then, we traverse the list and compare take assign, each iteration $maxNumber=max(maxNumber, thisNumber)$ and $minNumber=min(minNumber, thisNumber)$. In case the list is empty, we will return a tuple of None.
+We can initialize a min number $=\infty$ and a max number =-$\infty$. Then, we traverse the list and compare take assign, each iteration $maxNumber=max(maxNumber, thisNumber)$ and $minNumber=min(minNumber, thisNumber)$. In case the list is empty, we will return a tuple of None.
 
 ### Time Complexity:
 We traverse the list once, so the runtime is $O(n)$
