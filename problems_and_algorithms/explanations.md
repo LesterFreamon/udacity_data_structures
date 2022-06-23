@@ -72,7 +72,7 @@ The expected answer would be [531, 42]. Another expected answer can be [542, 31]
 
 
 ### Algorithm:
-We can create a min priority queue be heapifying the input (that would take $O(n)$ time) and then, for $\frac{n}{2}$ loops we can pop the two min elements, multiply them by $10^{loop\space num - 1}$ and add them to the numbers we inted to output. Then end result would be the two numbers that will give the maximum sum. The total time will be 
+We can create a min priority queue be heapifying the input (that would take O(n) time) and then, for $\frac{n}{2}$ loops we can pop the two min elements, multiply them by $$10^{loop\space num - 1}$$ and add them to the numbers we inted to output. Then end result would be the two numbers that will give the maximum sum. The total time will be 
 $$O(n) + \frac{n}{2} \cdot O(\log(n))=O(n\log(n))$$
 
 ### Time Complexity:
