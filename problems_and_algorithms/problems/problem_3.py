@@ -1,5 +1,6 @@
 import heapq
 from typing import List
+import unittest
 
 
 def rearrange_digits(input_list: List[int]) -> List[int]:
@@ -36,3 +37,23 @@ def test_function(test_case):
         print("Pass")
     else:
         print("Fail")
+
+
+class TestProblems(unittest.TestCase):
+
+    def test_rearrange_digits(self):
+        self.assertEqual(sum(rearrange_digits([1, 2, 3, 4, 5])), sum([542, 31]))
+        self.assertEqual(sum(rearrange_digits([4, 6, 2, 5, 9, 8])), sum([964, 852]))
+        self.assertEqual(sum(rearrange_digits([1, 2])), sum([1, 2]))
+        self.assertEqual(sum(rearrange_digits([1])), sum([1, 0]))
+        self.assertEqual(sum(rearrange_digits([])), sum([0, 0]))
+        self.assertEqual(sum(rearrange_digits([0, 2, 3, 4])), sum([40, 32]))
+
+
+if __name__ == '__main__':
+    print('running tests')
+    try:
+        unittest.main(argv=[''], verbosity=3, exit=False)
+        print('tests passed')
+    except:
+        print('tests failed')

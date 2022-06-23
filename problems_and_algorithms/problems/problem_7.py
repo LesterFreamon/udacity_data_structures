@@ -1,4 +1,5 @@
-from typing import Iterator, List, Optional
+from typing import Iterator, Optional
+import unittest
 
 
 class RouteTrieNode:
@@ -154,3 +155,26 @@ class Router:
 
         path_parts = raw_path.split('/')
         return filter(lambda x: len(x) > 0, path_parts)  # no need to keep empty parts
+
+
+class TestProblems(unittest.TestCase):
+
+    def test_router(self):
+        # create the router and add a route
+        router = Router("root handler",
+                        "not found handler")  # remove the 'not found handler' if you did not implement this
+        router.add_handler("/home/about", "about handler")  # add a route
+        self.assertEqual(router.lookup("/"), 'root handler')
+        self.assertEqual(router.lookup("/home"), 'not found handler')
+        self.assertEqual(router.lookup("/home/about"), 'about handler')
+        self.assertEqual(router.lookup("/home/about/"), 'about handler')
+        self.assertEqual(router.lookup("/home/about/me"), 'not found handler')
+
+
+if __name__ == '__main__':
+    print('running tests')
+    try:
+        unittest.main(argv=[''], verbosity=3, exit=False)
+        print('tests passed')
+    except:
+        print('tests failed')

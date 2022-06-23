@@ -1,4 +1,5 @@
 from typing import List
+import unittest
 
 
 def swap(arr: List[int], i: int, j: int) -> None:
@@ -33,3 +34,66 @@ def sort_012(input_list):
         else:
             pass
         r_i += 1
+
+
+class TestProblems(unittest.TestCase):
+
+    def test_sort_012(self):
+        input_list = [0, 0, 2, 2, 2, 1, 1, 1, 2, 0, 2]
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+        input_list = []
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+        input_list = [0, 0, 0]
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+        input_list = [1, 1, 1]
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+        input_list = [2, 2, 2]
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+        input_list = [0]
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+        input_list = [1]
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+        input_list = [2]
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+        input_list = [2, 1, 2, 0, 0, 2, 1, 0, 1, 0, 0, 2, 2, 2, 1, 2, 0, 0, 0, 2, 1, 0, 2, 0, 0, 1]
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+        input_list = [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2]
+        sorted_list = sorted(input_list)
+        sort_012(input_list)
+        self.assertEqual(input_list, sorted_list)
+
+
+if __name__ == '__main__':
+    print('running tests')
+    try:
+        unittest.main(argv=[''], verbosity=3, exit=False)
+        print('tests passed')
+    except:
+        print('tests failed')

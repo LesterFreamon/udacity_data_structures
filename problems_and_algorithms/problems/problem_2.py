@@ -1,5 +1,5 @@
 from typing import List
-
+import unittest
 
 def binary_search(sorted_list: List[int], target: int, l_i: int, h_i: int) -> int:
     """Find the index of the target in a sorted list.
@@ -83,3 +83,87 @@ def linear_search(input_list, number):
         if element == number:
             return index
     return -1
+
+
+def _test_function():
+    assert -1 == binary_search([], 10, 0, 0)
+    assert 0 == binary_search([10], 10, 0, 1)
+    assert 0 == binary_search([6, 7, 8, 9, 10], 6, 0, 5)
+    assert 2 == binary_search([1, 2, 3, 4], 3, 0, 4)
+    assert 2 == binary_search([6, 7, 8], 8, 0, 3)
+    assert -1 == binary_search([4, 8, 10, 11, 30], 9, 0, 5)
+
+
+class TestProblems(unittest.TestCase):
+
+    def test_binary_search(self):
+        self.assertEqual(-1, binary_search([], 10, 0, 0))
+        self.assertEqual(0, binary_search([10], 10, 0, 1))
+        self.assertEqual(0, binary_search([6, 7, 8, 9, 10], 6, 0, 5))
+        self.assertEqual(2, binary_search([1, 2, 3, 4], 3, 0, 4))
+        self.assertEqual(2, binary_search([6, 7, 8], 8, 0, 3))
+        self.assertEqual(-1, binary_search([4, 8, 10, 11, 30], 9, 0, 5))
+
+    def test_get_pivot_index(self):
+        rotated_list = [6, 7, 8, 9, 10, 1, 2, 3, 4]
+        self.assertEqual(5, get_pivot_index(rotated_list, 0, len(rotated_list) - 1))
+
+        rotated_list = [1, 2, 3, 4]
+        self.assertEqual(0, get_pivot_index(rotated_list, 0, len(rotated_list) - 1))
+
+        rotated_list = [6, 7, 8, 1]
+        self.assertEqual(3, get_pivot_index(rotated_list, 0, len(rotated_list) - 1))
+
+        rotated_list = [6, 7, 8, 1, 2, 3, 4]
+        self.assertEqual(3, get_pivot_index(rotated_list, 0, len(rotated_list) - 1))
+
+        rotated_list = []
+        self.assertEqual(0, get_pivot_index(rotated_list, 0, 0))
+
+        rotated_list = [10]
+        self.assertEqual(0, get_pivot_index(rotated_list, 0, 0))
+
+        rotated_list = [i * 4 for i in range(102, 200)] + [i * 4 for i in range(100)]
+        self.assertEqual(98, get_pivot_index(rotated_list, 0, len(rotated_list) - 1))
+
+    def test_rotated_array_search(self):
+        rotated_list = [6, 7, 8, 9, 10, 1, 2, 3, 4]
+        target = 6
+        self.assertEqual(linear_search(rotated_list, target), rotated_array_search(rotated_list, target))
+
+        rotated_list = [6, 7, 8, 9, 10, 1, 2, 3, 4]
+        target = 1
+        self.assertEqual(linear_search(rotated_list, target), rotated_array_search(rotated_list, target))
+
+        rotated_list = [6, 7, 8, 1, 2, 3, 4]
+        target = 8
+        self.assertEqual(linear_search(rotated_list, target), rotated_array_search(rotated_list, target))
+
+        rotated_list = [6, 7, 8, 1, 2, 3, 4]
+        target = 1
+        self.assertEqual(linear_search(rotated_list, target), rotated_array_search(rotated_list, target))
+
+        rotated_list = [6, 7, 8, 1, 2, 3, 4]
+        target = 10
+        self.assertEqual(linear_search(rotated_list, target), rotated_array_search(rotated_list, target))
+
+        rotated_list = []
+        target = 10
+        self.assertEqual(linear_search(rotated_list, target), rotated_array_search(rotated_list, target))
+
+        rotated_list = [10]
+        target = 10
+        self.assertEqual(linear_search(rotated_list, target), rotated_array_search(rotated_list, target))
+
+        rotated_list = [i * 4 for i in range(102, 200)] + [i * 4 for i in range(100)]
+        target = 110 * 4
+        self.assertEqual(linear_search(rotated_list, target), rotated_array_search(rotated_list, target))
+
+
+if __name__ == '__main__':
+    print('running tests')
+    try:
+        unittest.main(argv=[''], verbosity=3, exit=False)
+        print('tests passed')
+    except:
+        print('tests failed')

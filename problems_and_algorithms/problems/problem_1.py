@@ -1,3 +1,6 @@
+import unittest
+
+
 def sqrt(number: int) -> int:
     """
     Calculate the floored square root of a number
@@ -28,3 +31,24 @@ def sqrt(number: int) -> int:
         else:  # n^2 is too big, so decrease the search space by increasing min_num
             top_num = run_num
             run_num = run_num - ((run_num - min_num) // 2)
+
+
+class TestProblems(unittest.TestCase):
+    def test_sqrt(self):
+        self.assertEqual(3, sqrt(9))
+        self.assertEqual(0, sqrt(0))
+        self.assertEqual(4, sqrt(16))
+        self.assertEqual(1, sqrt(1))
+        self.assertEqual(5, sqrt(27))
+        self.assertEqual(9, sqrt(99))
+        self.assertEqual(316264, sqrt(100023042335))
+        self.assertEqual(1000115205, sqrt(1000230423351234123))
+
+
+if __name__ == '__main__':
+    print('running tests')
+    try:
+        unittest.main(argv=[''], verbosity=3, exit=False)
+        print('tests passed')
+    except:
+        print('tests failed')
