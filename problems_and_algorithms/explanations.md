@@ -136,15 +136,19 @@ Since we are swapping in place, then additional space needed is $O(1)$
 
 ### Algorithm:
 
-Using a dictionry to store the letters of the words. build a graph with that dictionary to find later letters.
+Using a dictionary to store the letters of the words. build a graph with that dictionary to find later letters. 
+Add a flag to letters that signifies the end of words. 
 
 ### Time Complexity:
 
-Worst case is $O(n)$ where $n$ is the number of letters in a string
+* `Trie.init`: initializing the object takes O(1) time.
+* `Trie.insert(self, word)`: We traverse every letter of the word and then either initialize a dictionary or dive into the dictionary of the letter already exists. In either case, every iteration takes O(1) time, and the total function takes O(n), as the number of letters. 
+* `Trie.find(self, prefix)`: We traverse every letter of the prefix, and either add it to an existing dictionary or create a new one. Thus, the runtime for each iteration is O(1), and the total runtime is O(n), where n is the number of letters in the prefix.
+* `TrieNode.suffixes(self, suffix)`: We traverse all of the branches from a certain spot, once we reach an end of word flag, we also copy that part we've traversed so far. The worse case is getting all of the suffixes, which will have the runtime of O(N), where N is all of the letters of all of the words ever inserted into the tree. That happens if all of the letters are end of words, and that no word was exactly similar to a previous word inserted.
 
 ### Space Complexity:
 
-Worst case is $O(n)$ where $n$ is the number of letters in the longest string.
+The general case is O(alphabet_size * average_word_size * number_of_words)
 
 ## Problem 6: Max and Min in a Unsorted Array
 
@@ -184,8 +188,11 @@ Three classes:
 
 ### Time Complexity:
 
-Worst case is $O(n)$ where $n$ is the number of url parts in the path
+* `RouteTrie.insert(path_parts, handler)`: O(number of path parts), as we traverse path_parts, and each iteration is O(1)
+* `RouteTrie.find(path_parts`: O(number of path parts), same as the reason above
+* `Router.add_handler(raw_path, new_handler)`: O(n), where n is the number of characters in `raw_path`. The reason being that we need to split by `/`, which takes linear time depending on the number of characters.
+* `Router.lookup(raw_path)`: O(n), where n is the number of characters is `raw_path`.
 
 ### Space Complexity:
 
-Worst case is $O(n)$ where $n$ is the number of url parts in the longest path.
+Worst case is $O(n)$ where $n$ is the number of characters ever inserted (worst case, when we can have no redundancy).
