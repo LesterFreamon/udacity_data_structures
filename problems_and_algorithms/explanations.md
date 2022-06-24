@@ -101,9 +101,8 @@ As written in the description of the algorithm, the runtime would be $O(n\cdot\l
 
 ### Space Complexity:
 
-Since we are heapifying the input array inplace, and there are no recursion steps, the additional space required is $O(
-1)$
-
+Going into the source code of heapify and heappop, there is a while loop used, NOT a recursion, and does all of the
+permutations in place, so the space complexity it O(1). Merge sort would require O(n), but we are not using merge sort.
 ## Problem 4: Dutch National Flag Problem
 
 ### Description:
@@ -136,17 +135,30 @@ Since we are swapping in place, then additional space needed is $O(1)$
 
 ### Algorithm:
 
-Using a dictionary to store the letters of the words. build a graph with that dictionary to find later letters. 
-Add a flag to letters that signifies the end of words. 
+Using a dictionary to store the letters of the words. build a graph with that dictionary to find later letters. Add a
+flag to letters that signifies the end of words.
 
 ### Time Complexity:
 
 * `Trie.init`: initializing the object takes O(1) time.
-* `Trie.insert(self, word)`: We traverse every letter of the word and then either initialize a dictionary or dive into the dictionary of the letter already exists. In either case, every iteration takes O(1) time, and the total function takes O(n), as the number of letters. 
-* `Trie.find(self, prefix)`: We traverse every letter of the prefix, and either add it to an existing dictionary or create a new one. Thus, the runtime for each iteration is O(1), and the total runtime is O(n), where n is the number of letters in the prefix.
-* `TrieNode.suffixes(self, suffix)`: We traverse all of the branches from a certain spot, once we reach an end of word flag, we also copy that part we've traversed so far. The worse case is getting all of the suffixes, which will have the runtime of O(N), where N is all of the letters of all of the words ever inserted into the tree. That happens if all of the letters are end of words, and that no word was exactly similar to a previous word inserted.
+* `Trie.insert(self, word)`: We traverse every letter of the word and then either initialize a dictionary or dive into
+  the dictionary of the letter already exists. In either case, every iteration takes O(1) time, and the total function
+  takes O(n), as the number of letters.
+* `Trie.find(self, prefix)`: We traverse every letter of the prefix, and either add it to an existing dictionary or
+  create a new one. Thus, the runtime for each iteration is O(1), and the total runtime is O(n), where n is the number
+  of letters in the prefix.
+* `TrieNode.suffixes(self, suffix)`: We traverse all of the branches from a certain spot, once we reach an end of word
+  flag, we also copy that part we've traversed so far. The worse case is getting all of the suffixes, which will have
+  the runtime of O(N), where N is all of the letters of all of the words ever inserted into the tree. That happens if
+  all of the letters are end of words, and that no word was exactly similar to a previous word inserted.
 
 ### Space Complexity:
+
+* `Trie.insert(self, word)`: O(n), where n is the number of letters in a word, because we are, at most, adding all of the letters to a dictionary.
+* `Trie.find(self, prefix)`: We traverse every letter of the prefix, and either add it to an existing dictionary or
+  create a new one. Thus, the additional space required is O(1).
+* `TrieNode.suffixes(self, suffix)`: Since we don't copy but return an existing sub-dictionary. 
+
 
 The general case is O(alphabet_size * average_word_size * number_of_words)
 
@@ -188,11 +200,21 @@ Three classes:
 
 ### Time Complexity:
 
-* `RouteTrie.insert(path_parts, handler)`: O(number of path parts), as we traverse path_parts, and each iteration is O(1)
+* `RouteTrie.insert(path_parts, handler)`: O(number of path parts), as we traverse path_parts, and each iteration is O(
+  1)
 * `RouteTrie.find(path_parts`: O(number of path parts), same as the reason above
-* `Router.add_handler(raw_path, new_handler)`: O(n), where n is the number of characters in `raw_path`. The reason being that we need to split by `/`, which takes linear time depending on the number of characters.
+* `Router.add_handler(raw_path, new_handler)`: O(n), where n is the number of characters in `raw_path`. The reason being
+  that we need to split by `/`, which takes linear time depending on the number of characters.
 * `Router.lookup(raw_path)`: O(n), where n is the number of characters is `raw_path`.
+* `Router.split_path`: O(n) where n is the number of parts, due to the use of `raw_path.split('/')`
 
 ### Space Complexity:
 
-Worst case is $O(n)$ where $n$ is the number of characters ever inserted (worst case, when we can have no redundancy).
+* `RouteTrie.insert(path_parts, handler)`: O(1), since we just add an element to a dictionary.
+* `RouteTrie.find(path_parts)`: O(1), same as the reason above
+* `Router.add_handler(raw_path, new_handler)`: O(n), where n is the number of parts in `raw_path`. The reason being
+  that we need to split by `/`, which takes linear time depending on the number of characters.
+* `Router.lookup(raw_path)`: O(n), since we use `Router.split_path`, where n is the number of parts
+* `Router.split_path`: O(n) where n is the number of parts, due to the use of `raw_path.split('/')`
+
+In general, we need space, max, as the number of nodes, which are n, as the number of parts. Thus the space complexity is O(n), with n being the total number of parts in the paths.
