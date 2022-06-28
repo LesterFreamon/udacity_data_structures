@@ -2,8 +2,8 @@ import networkx as nx
 import pickle
 import plotly.plotly as py
 import random
-from plotly.graph_objs import *
-from plotly.offline import init_notebook_mode, plot, iplot
+from plotly.plotly.graph_objs import *
+from plotly.plotly.offline import init_notebook_mode, plot, iplot
 
 init_notebook_mode(connected=True)
 
