@@ -157,11 +157,13 @@ flag to letters that signifies the end of words.
 * `TrieNode.insert(self, char)`: O(1) because we are, at most, adding an element to a dictionary.
 ### Space Complexity:
 
+* `TrieNode.init`: initializing the dictionary takes O(1) space.
+* `TrieNode.suffixes(self, suffix)`: Since we don't copy but return an existing sub-dictionary, so O(1).
+* `TrieNode.insert(self, suffix)`: Since O(1) because we are adding at most one element to a dictionary
 * `Trie.insert(self, word)`: O(n), where n is the number of letters in a word, because we are, at most, adding all of the letters to a dictionary.
 * `Trie.find(self, prefix)`: We traverse every letter of the prefix, and either add it to an existing dictionary or
   create a new one. Thus, the additional space required is O(1).
-* `TrieNode.suffixes(self, suffix)`: Since we don't copy but return an existing sub-dictionary, so O(1).
-* `TrieNode.insert(self, suffix)`: Since O(1) because we are adding at most one element to a dictionary
+* `Trie.init`: O(1) since initializing the trie node take O(1) space.
 
 
 The general case is O(alphabet_size * average_word_size * number_of_words)
@@ -204,20 +206,25 @@ Three classes:
 
 ### Time Complexity:
 
+* `RouteTrieNode.__init__(path_part)`: O(1), since we are just creating an empty dict.
 * `RouteTrieNode.insert(path_part)`: O(1), as we are adding, at most, one element to a dictionary.
+* `RouteTrie.__init__`: O(1) since we are creating a RouteTrieNode and saving a handler, both require O(1) time. 
 * `RouteTrie.insert(path_parts, handler)`: O(number of path parts), as we traverse path_parts, and each iteration is O(
   1)
 * `RouteTrie.find(path_parts`: O(number of path parts), same as the reason above
+* `Router.__init__`: O(1) since we are just creating a RouteTrie and saving a "no_handler", each requiring O(1) time.
 * `Router.add_handler(raw_path, new_handler)`: O(n), where n is the number of characters in `raw_path`. The reason being
   that we need to split by `/`, which takes linear time depending on the number of characters.
 * `Router.lookup(raw_path)`: O(n), where n is the number of characters is `raw_path`.
 * `Router.split_path`: O(n) where n is the number of parts, due to the use of `raw_path.split('/')`
 
 ### Space Complexity:
-
+* `RouteTrieNode.__init__(path_part)`: O(1) space, since we are just creating an empty dict.
 * `RouteTrieNode.insert(path_part)`: O(1), as we are adding, at most, one element to a dictionary.
+* `RouteTrie.__init__`: O(1) since we are creating a RouteTrieNode and saving a handler, both require O(1) space.
 * `RouteTrie.insert(path_parts, handler)`: O(1), since we just add an element to a dictionary.
 * `RouteTrie.find(path_parts)`: O(1), same as the reason above
+* `Router.__init__`: O(1) since we are just creating a RouteTrie and saving a "no_handler", each requiring O(1) space.
 * `Router.add_handler(raw_path, new_handler)`: O(n), where n is the number of parts in `raw_path`. The reason being
   that we need to split by `/`, which takes linear time depending on the number of characters.
 * `Router.lookup(raw_path)`: O(n), since we use `Router.split_path`, where n is the number of parts
