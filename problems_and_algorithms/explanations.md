@@ -102,7 +102,10 @@ As written in the description of the algorithm, the runtime would be $O(n\cdot\l
 ### Space Complexity:
 
 Going into the source code of heapify and heappop, there is a while loop used, NOT a recursion, and does all of the
-permutations in place, so the space complexity it O(1). Merge sort would require O(n), but we are not using merge sort.
+permutations in place, so the added space complexity it O(1). If you include the input itself, then it's O(N).
+
+Merge sort would require O(n), but we are not using merge sort.
+
 ## Problem 4: Dutch National Flag Problem
 
 ### Description:
@@ -151,13 +154,14 @@ flag to letters that signifies the end of words.
   flag, we also copy that part we've traversed so far. The worse case is getting all of the suffixes, which will have
   the runtime of O(N), where N is all of the letters of all of the words ever inserted into the tree. That happens if
   all of the letters are end of words, and that no word was exactly similar to a previous word inserted.
-
+* `TrieNode.insert(self, char)`: O(1) because we are, at most, adding an element to a dictionary.
 ### Space Complexity:
 
 * `Trie.insert(self, word)`: O(n), where n is the number of letters in a word, because we are, at most, adding all of the letters to a dictionary.
 * `Trie.find(self, prefix)`: We traverse every letter of the prefix, and either add it to an existing dictionary or
   create a new one. Thus, the additional space required is O(1).
-* `TrieNode.suffixes(self, suffix)`: Since we don't copy but return an existing sub-dictionary. 
+* `TrieNode.suffixes(self, suffix)`: Since we don't copy but return an existing sub-dictionary, so O(1).
+* `TrieNode.insert(self, suffix)`: Since O(1) because we are adding at most one element to a dictionary
 
 
 The general case is O(alphabet_size * average_word_size * number_of_words)
@@ -200,6 +204,7 @@ Three classes:
 
 ### Time Complexity:
 
+* `RouteTrieNode.insert(path_part)`: O(1), as we are adding, at most, one element to a dictionary.
 * `RouteTrie.insert(path_parts, handler)`: O(number of path parts), as we traverse path_parts, and each iteration is O(
   1)
 * `RouteTrie.find(path_parts`: O(number of path parts), same as the reason above
@@ -210,6 +215,7 @@ Three classes:
 
 ### Space Complexity:
 
+* `RouteTrieNode.insert(path_part)`: O(1), as we are adding, at most, one element to a dictionary.
 * `RouteTrie.insert(path_parts, handler)`: O(1), since we just add an element to a dictionary.
 * `RouteTrie.find(path_parts)`: O(1), same as the reason above
 * `Router.add_handler(raw_path, new_handler)`: O(n), where n is the number of parts in `raw_path`. The reason being
