@@ -150,6 +150,7 @@ flag to letters that signifies the end of words.
 * `Trie.find(self, prefix)`: We traverse every letter of the prefix, and either add it to an existing dictionary or
   create a new one. Thus, the runtime for each iteration is O(1), and the total runtime is O(n), where n is the number
   of letters in the prefix.
+* `TrieNode.init`: initializing the a dictionary takes O(1) time.
 * `TrieNode.suffixes(self, suffix)`: We traverse all of the branches from a certain spot, once we reach an end of word
   flag, we also copy that part we've traversed so far. The worse case is getting all of the suffixes, which will have
   the runtime of O(N), where N is all of the letters of all of the words ever inserted into the tree. That happens if
